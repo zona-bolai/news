@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Bolai - Kabar Terkini Tanpa Batas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #2b2d42;
+            --accent: #70c1b3;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Urbanist', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Modern */
+        header {
+            background: rgba(43, 45, 66, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+            transform: rotate(-10deg);
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .nav-link:hover {
+            color: var(--accent);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+        }
+        
+        .hero-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--dark);
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+            background: #ff5252;
+        }
+        
+        /* Live News Ticker */
+        .live-ticker {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ticker-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .live-badge {
+            background: var(--primary);
+            padding: 0.3rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-right: 1.5rem;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .live-badge::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .ticker-content {
+            white-space: nowrap;
+            animation: ticker-scroll 40s linear infinite;
+            padding-left: 100%;
+        }
+        
+        @keyframes ticker-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* News Grid */
+        .news-section {
+            padding: 5rem 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+        
+        .card-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 1.8rem;
+        }
+        
+        .card-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .card-excerpt {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+        
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .author-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Featured Story */
+        .featured-story {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .featured-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .featured-content {
+            padding: 2rem 0;
+        }
+        
+        .featured-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .featured-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-excerpt {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+        
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .newsletter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .newsletter-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: #666;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 1.2rem 2rem;
+            border: none;
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+        }
+        
+        .newsletter-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 2.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .newsletter-btn:hover {
+            background: #ff5252;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 5rem 0 2rem;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 20px;
+        }
+        
+        .footer-links a:hover::before {
+            opacity: 1;
+            left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .featured-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+                font-size: 1.5rem;
+                color: white;
+                cursor: pointer;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: 12px;
+            }
+            
+            .newsletter-input {
+                border-radius: 12px 12px 0 0 !important;
+            }
+            
+            .newsletter-btn {
+                padding: 1rem;
+                border-radius: 0 0 12px 12px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .ticker-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="logo-text">Zona Bolai</div>
+            </div>
+            <nav class="main-nav">
+                <a href="#" class="nav-link">Beranda</a>
+                <a href="#" class="nav-link">Politik</a>
+                <a href="#" class="nav-link">Bisnis</a>
+                <a href="#" class="nav-link">Teknologi</a>
+                <a href="#" class="nav-link">Hiburan</a>
+                <a href="#" class="nav-link">Olahraga</a>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-breaking-news-on-a-tv-screen-43347-large.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-tag">Update Terkini</span>
+                <h1 class="hero-title">Informasi Tanpa Batas, Kabar Tanpa Jarak</h1>
+                <p class="hero-subtitle">Dapatkan berita terpercaya dan terupdate dari seluruh penjuru dunia langsung di genggaman Anda. Zona Bolai memberikan pengalaman berbeda dalam menyajikan informasi.</p>
+                <a href="#" class="btn">
+                    <span>Jelajahi Sekarang</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live News Ticker -->
+    <section class="live-ticker">
+        <div class="container ticker-container">
+            <div class="live-badge">
+                LIVE
+            </div>
+            <div class="ticker-content">
+                • Presiden akan lakukan kunjungan kerja ke Amerika minggu depan • Harga BBM diprediksi turun mulai bulan depan • Timnas Indonesia lolos ke babak final Piala Asia 2023 • Gempa 5.8 SR mengguncang Jawa Barat, tidak ada korban jiwa • Startup lokal berhasil dapat pendanaan senilai $50 juta
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Berita Terkini</h2>
+                <a href="#" class="btn">
+                    <span>Lihat Semua</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="news-grid">
+                <!-- News Card 1 -->
+                <div class="news-card">
+                    <span class="card-badge">Politik</span>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Berita 1">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-date">
+                            <i class="far fa-clock"></i>
+                            <span>2 Jam Lalu</span>
+                        </div>
+                        <h3 class="card-title">Pertemuan Tingkat Tinggi G20 Hasilkan Kesepakatan Baru</h3>
+                        <p class="card-excerpt">Para pemimpin dunia menyepakati paket bantuan ekonomi untuk negara berkembang dalam pertemuan G20 kemarin.</p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Author" class="author-avatar">
+                                <span class="author-name">Sarah Wijaya</span>
+                            </div>
+                            <div class="card-views">
+                                <i class="far fa-eye"></i>
+                                <span>1.2k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Card 2 -->
+                <div class="news-card">
+                    <span class="card-badge">Bisnis</span>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Berita 2">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-date">
+                            <i class="far fa-clock"></i>
+                            <span>5 Jam Lalu</span>
+                        </div>
+                        <h3 class="card-title">Inflasi Global Mulai Menunjukkan Tanda Penurunan</h3>
+                        <p class="card-excerpt">Data terbaru menunjukkan tren penurunan inflasi di berbagai negara setelah beberapa bulan mencapai level tertinggi.</p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" class="author-avatar">
+                                <span class="author-name">Budi Santoso</span>
+                            </div>
+                            <div class="card-views">
+                                <i class="far fa-eye"></i>
+                                <span>890</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Card 3 -->
+                <div class="news-card">
+                    <span class="card-badge">Teknologi</span>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Berita 3">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-date">
+                            <i class="far fa-clock"></i>
+                            <span>8 Jam Lalu</span>
+                        </div>
+                        <h3 class="card-title">AI Terbaru Mampu Prediksi Penyakit dengan Akurasi 95%</h3>
+                        <p class="card-excerpt">Perusahaan teknologi meluncurkan sistem AI yang dapat mendiagnosa penyakit lebih akurat dari dokter manusia.</p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Author" class="author-avatar">
+                                <span class="author-name">Dewi Anggraeni</span>
+                            </div>
+                            <div class="card-views">
+                                <i class="far fa-eye"></i>
+                                <span>1.5k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Story -->
+    <section class="featured-story">
+        <div class="container featured-container">
+            <div class="featured-content">
+                <span class="featured-tag">Featured Story</span>
+                <h2 class="featured-title">Penemuan Spesies Baru di Hutan Amazon yang Belum Tereksplorasi</h2>
+                <p class="featured-excerpt">Ekspedisi ilmiah berhasil mengidentifikasi 20 spesies baru tumbuhan dan hewan di area hutan Amazon yang sebelumnya tidak terjamah. Temuan ini membuka wawasan baru tentang keanekaragaman hayati dunia.</p>
+                <a href="#" class="btn">
+                    <span>Baca Selengkapnya</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container newsletter-container">
+            <h2 class="newsletter-title">Berlangganan Newsletter Kami</h2>
+            <p class="newsletter-subtitle">Dapatkan update berita terbaru langsung ke inbox email Anda setiap hari. Gratis dan tanpa spam!</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Masukkan alamat email Anda" class="newsletter-input">
+                <button type="submit" class="newsletter-btn">Berlangganan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <!-- Footer Column 1 -->
+                <div class="footer-col footer-about">
+                    <h3>Tentang Zona Bolai</h3>
+                    <p>Zona Bolai adalah platform berita terkini yang menyajikan informasi terpercaya dan akurat dari seluruh dunia dengan tampilan modern dan pengalaman pengguna yang unik.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Footer Column 2 -->
+                <div class="footer-col">
+                    <h3>Kategori Populer</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Politik</a></li>
+                        <li><a href="#">Bisnis & Ekonomi</a></li>
+                        <li><a href="#">Teknologi</a></li>
+                        <li><a href="#">Kesehatan</a></li>
+                        <li><a href="#">Olahraga</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Footer Column 3 -->
+                <div class="footer-col">
+                    <h3>Navigasi Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Footer Column 4 -->
+                <div class="footer-col">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Media No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> redaksi@zonabolai.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Zona Bolai. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
